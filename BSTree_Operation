@@ -1,16 +1,17 @@
 /*
 Author: Lucifa 
 Date: 2013/1/27
-Brief: 输入一颗二元查找树，将该树转换为它的镜像及常用二叉树遍历及深度算法
-Example：
-输入：    
+Brief: Basic APIs of the BST Tree that include create, traversal(recursive & non-recursive), image,
+       BFS(breadth first search) and getLCA(Latest common parent).
+Image Example：
+Input：    
    10
   / \
   6  14
  / \ / \
 4  8 12 16
 
-输出：
+Output：
    10
   / \
  14  6
@@ -24,21 +25,18 @@ Example：
 #include<stack>  
 using namespace std;  
   
-//二叉树结点的描述  
+//Description of BST Node 
 typedef struct BiTNode  
 {  
     char data;  
-    struct BiTNode *lchild, *rchild;      //左右孩子  
+    struct BiTNode *lchild, *rchild;       
 }BiTNode,*BiTree;  
   
-//按先序遍历创建二叉树  
-//BiTree *CreateBiTree()     //返回结点指针类型  
-//void CreateBiTree(BiTree &root)      //引用类型的参数  
-void CreateBiTree(BiTNode **root)    //二级指针作为函数参数  
+//Create BST by pre-order  
+void CreateBiTree(BiTNode **root)   
 {  
-    char ch; //要插入的数据  
+    char ch; 
     scanf("\n%c", &ch);  
-    //cin>>ch;  
     if(ch=='#')  
         *root = NULL;  
     else  
@@ -52,14 +50,13 @@ void CreateBiTree(BiTNode **root)    //二级指针作为函数参数
     }  
 }  
   
-//前序遍历的算法程序  
 void PreOrder(BiTNode *root)  
 {  
     if(root==NULL)  
         return ;  
-    printf("%c ", root->data); //输出数据  
-    PreOrder(root->lchild); //递归调用，前序遍历左子树  
-    PreOrder(root->rchild); //递归调用，前序遍历右子树  
+    printf("%c ", root->data);
+    PreOrder(root->lchild); 
+    PreOrder(root->rchild); 
 }  
   
 //中序遍历的算法程序  
