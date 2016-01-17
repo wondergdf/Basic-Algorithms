@@ -43,9 +43,9 @@ void CreateBiTree(BiTNode **root)
     {  
         *root = (BiTNode *)malloc(sizeof(BiTNode));  
         (*root)->data = ch;  
-        printf("请输入%c的左孩子：",ch);  
+        printf("please input the %c left child ：",ch);  
         CreateBiTree(&((*root)->lchild));  
-        printf("请输入%c的右孩子：",ch);  
+        printf("and input the %c right child ：",ch);  
         CreateBiTree(&((*root)->rchild));  
     }  
 }  
