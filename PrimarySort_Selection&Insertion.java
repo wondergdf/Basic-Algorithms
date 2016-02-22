@@ -34,3 +34,26 @@ Class Insertion_Sort
 		
 	}
 }
+
+Class Shell_Sort
+{// extend the insertion sort 
+	public static void sort (Comparable[] data)
+	{
+		int length = data.length;
+		int h =1 ;
+		while(h<length/3) {h = h*3 +1 ;}
+		while(h>=1)
+		{
+			for (int i=h; i<length ; i++) 
+			{
+				for (int j = i;j>=h && less(data[j],data[j-h]); j=j-h) 
+				{
+					exch(data,j,j-h);
+				}
+				
+			}
+
+			h=h/3;
+		}
+	}
+}
