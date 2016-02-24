@@ -1,0 +1,73 @@
+Class ThreeWaysPartition_QuickSort
+{
+	public static void sort (Comparable[] data)
+	{
+		sort(data,0,data.length-1);
+
+	}
+	private static void sort (Comparable[] data,int start, int end)
+	{
+		if(end<=start) return ;
+
+		Comparable v = data[start];
+		int i = start + 1;
+		int less_pointer = start;
+		int greater_pointer = end;
+
+		while(i<=greater_pointer)
+		{
+           int result = data[i].compareTo(v);
+           if(result >0)
+           {
+              exch(data,i,greater_pointer);
+              greater_pointer--;
+           }
+           if(result <0)
+           {
+              exch(data,i,less_pointer);
+              i++;
+              less_pointer++;
+           }
+           else
+           {
+              i++;
+           }
+		}
+		sort(data,start,less_pointer-1);
+		sort(data,greater_pointer+1,end);
+	}
+
+}
+
+Clss Traditional_QuickSort
+{
+	public static void sort(Comparable[] data)
+	{
+		StdRandom.shuffle(data);
+		sort(data,0,data.length-1);
+	}
+	private static void sort(Comparable[] data, int start, int end)
+	{
+		if(end <= start) return;
+		int partition_index = partition(data,start,end);
+		sort(data,start,partition_index-1);
+		sort(data,partition_index+1,end);
+	}
+	private static int partition(Comparable[] data, int start, int end )
+	{
+		Comparable v = data[start];
+		int less_pointer = start + 1;
+		int greater_pointer = end ;
+		while(less_pointer < greater_pointer)
+		{
+			while(less(data[less_pointer],v)) less_pointer++;
+			while(less(v,data[greater_pointer])) greater_pointer--;
+			if(less_pointer<greater_pointer)
+			{
+				exch(data,less_pointer,greater_pointer);
+			}
+		}
+		exch(data,start,greater_pointer);
+		return greater_pointer; 
+	}
+}
