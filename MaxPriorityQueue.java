@@ -49,6 +49,21 @@ public class MaxPriorityQueue<Key extends Comparable<Key>> {
 			k = j;
 		}
 	}
+	
+	private void sink(int k,int N) {
+		while (2 * k <= N) {
+			int j = 2 * k;
+			if (j < N && less(j, j + 1)) {
+				j++;
+			}
+			if (!less(k, j)) {
+				break;
+			}
+			exchange(k, j);
+			k = j;
+		}
+	}
+
 
 	public void insert(Key value) {
 		pq[++N] = value;
@@ -62,7 +77,18 @@ public class MaxPriorityQueue<Key extends Comparable<Key>> {
 		sink(1);
 		return max;
 	}
-
+	
+	public void heap_Sort(Comparable<Key>[] data){
+		int length = data.length;
+		for(int k = length/2; k >=1 ; k--){
+          sink(k);			
+		}
+		while(length >1){
+			exchange(1, length--);
+			sink(1,length);			
+		}
+	}
+	
 	@Deprecated
 	public void printQueue() {
 		for (int i = 1; i<= N; i++) {
