@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import oracle.net.aso.c;
-
 public class BST<Key extends Comparable<Key>, Value> {
 
 	private class Node {
@@ -88,7 +86,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	private Node max(Node x) {
 		if (x.right == null)
 			return x;
-		return min(x.right);
+		return max(x.right);
 	}
 
 	public void deleteMin() {
@@ -137,7 +135,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 	}
 
 	private Iterator<Key> keys(Key lo, Key hi) {
-	    Queue<Key> queue = new LinkedList<Key>();
+		Queue<Key> queue = new LinkedList<Key>();
 		Keys(root, queue, lo, hi);
 		return queue.iterator();
 	}
@@ -158,35 +156,77 @@ public class BST<Key extends Comparable<Key>, Value> {
 		}
 
 	}
+
+	public void Reverse() {
+		Reverse(root);
+	}
+
+	private void Reverse(Node root) {
+		Queue<Node> queue = new LinkedList<Node>();
+		queue.add(root);
+		while (!queue.isEmpty()) {
+			Node node = queue.poll();
+			if (node != null) {
+				Node temp;
+				if (node.left != null && node.right != null) {
+					temp = node.right;
+					node.right = node.left;
+					node.left = temp;
+					queue.add(node.left);
+					queue.add(node.right);
+
+				} else if (node.left == null && node.right != null) {
+					node.left = node.right;
+					node.right = null;
+					queue.add(node.left);
+
+				} else if (node.right == null && node.left != null) {
+					node.right = node.left;
+					node.left = null;
+                    queue.add(node.right);
+				} else {
+					continue;
+				}
+			}
+		}
+
+	}
+
 	public static void main(String[] args) {
 		BST<Integer, String> testBST = new BST<Integer, String>();
-		testBST.put(9, "nine");
+
 		testBST.put(3, "three");
 		testBST.put(5, "five");
 		testBST.put(2, "two");
+		testBST.put(9, "nine");
 		testBST.put(1, "one");
 		testBST.put(8, "eight");
 		testBST.put(4, "four");
-		
-		System.out.println("Print info: -------------------");
-		System.out.println(testBST.min());
-		System.out.println(testBST.max());
-		Iterator<Integer> iterator  = testBST.keys();
 
-		System.out.println("Print data: -------------------");
-		while(iterator.hasNext()){
-			System.out.println(iterator.next());
+		System.out.println("---Print info: -------------------");
+		System.out.println("The Min Item: " + testBST.min());
+		System.out.println("The Max Item:" + testBST.max());
+
+		Iterator<Integer> iterator = testBST.keys();
+
+		System.out.println("---Print the Key set: -------------------");
+		while (iterator.hasNext()) {
+			System.out.print("-" + iterator.next() + "-");
 		}
-		
-		
+
+		System.out.println();
+
 		testBST.deleteMin();
-		System.out.println("Print info: -------------------");
+		System.out
+				.println("---After remove the previous Min item, the Current Min Item : ----");
 		System.out.println(testBST.min());
 		
-		System.out.println("Print data: -------------------");
-		iterator  = testBST.keys();
-		while(iterator.hasNext()){
-			System.out.println(iterator.next());
-		}
+		System.out.println("---Test Reverse binary tree func: ---------------");
+		testBST.Reverse();
+		System.out.println(testBST.root.left.left.value);
+		testBST.Reverse();
+		System.out.println(testBST.root.left.value);
+		
+
 	}
 }
