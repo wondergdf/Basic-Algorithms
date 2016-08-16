@@ -1,4 +1,3 @@
-package DesignPattern;
 
 class Meal {
 
