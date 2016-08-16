@@ -1,4 +1,3 @@
-package DesignPattern;
 
 import java.io.Serializable;
 
