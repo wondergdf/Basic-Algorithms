@@ -1,3 +1,4 @@
+package ClassicAlgorithm;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -59,7 +60,8 @@ public class Find_the_one {
 
 		for (int i = 0; i < target_array.length; i++) {
 			if (set.contains(target_array[i])) {
-				return target_array[i];
+				result =  target_array[i];
+				break;
 			} else {
 				set.add(target_array[i]);
 			}
@@ -83,7 +85,7 @@ public class Find_the_one {
 
 		for (int i = 0; i < target_array.length; i++) {
 			if (map.containsKey(target_array[i])) {
-				map.put(target_array[i], map.get(target_array[i]++));
+				map.put(target_array[i], map.get(target_array[i])+1);
 			} else {
 				map.put(target_array[i], 1);
 			}
